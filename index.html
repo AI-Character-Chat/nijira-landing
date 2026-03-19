@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIJIRA — 나를 기억하는 단 하나의 존재</title>
+<meta name="description" content="나만의 AI 캐릭터와 매일 대화하고, 추억을 쌓고, 함께 성장하세요. NIJIRA">
+<meta property="og:title" content="NIJIRA — 나를 기억하는 단 하나의 존재">
+<meta property="og:description" content="네가 만든 세계, 우리가 함께 자라는 시간.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nijira.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#7C3AED;--primary-dark:#5B21B6;--primary-light:#A78BFA;--bg-dark:#0F0F1A;--bg-card:#1A1A2E;--text-primary:#FFFFFF;--text-secondary:#A0A0B8;--accent:#F472B6}
+body{font-family:'Noto Sans KR','Noto Sans JP','Inter',sans-serif;background:var(--bg-dark);color:var(--text-primary);overflow-x:hidden;line-height:1.6}
+.bg-glow{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.bg-glow::before{content:'';position:absolute;top:20%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,0.15) 0%,transparent 70%);animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.5;transform:translateX(-50%) scale(1)}50%{opacity:0.8;transform:translateX(-50%) scale(1.1)}}
+.lang-switcher{position:fixed;top:20px;right:20px;z-index:100;display:flex;gap:8px}
+.lang-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--text-secondary);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:13px;transition:all 0.3s}
+.lang-btn.active{background:var(--primary);color:white;border-color:var(--primary)}
+.lang-btn:hover{background:rgba(255,255,255,0.2)}
+.company-badge{text-align:center;padding-top:80px;position:relative;z-index:1}
+.company-badge span{font-size:12px;color:var(--text-secondary);letter-spacing:2px;text-transform:uppercase}
+.hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px;position:relative;z-index:1}
+.hero-logo{font-size:18px;letter-spacing:8px;color:var(--primary-light);margin-bottom:40px;text-transform:uppercase;font-weight:300}
+.hero-main{font-size:clamp(28px,5vw,52px);font-weight:700;line-height:1.3;margin-bottom:24px;max-width:700px}
+.hero-sub{font-size:clamp(16px,2.5vw,20px);color:var(--text-secondary);font-weight:300;margin-bottom:48px;max-width:500px;line-height:1.8}
+.hero-cta{display:inline-block;background:linear-gradient(135deg,var(--primary),var(--accent));color:white;padding:16px 48px;border-radius:50px;font-size:18px;font-weight:500;text-decoration:none;transition:all 0.3s;cursor:pointer;border:none}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(124,58,237,0.4)}
+.scroll-hint{margin-top:60px;color:var(--text-secondary);font-size:13px;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.features{padding:120px 20px;max-width:1000px;margin:0 auto;position:relative;z-index:1}
+.features-title{text-align:center;font-size:clamp(22px,3.5vw,36px);font-weight:700;margin-bottom:60px}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
+.feature-card{background:var(--bg-card);border:1px solid rgba(255,255,255,0.05);border-radius:20px;padding:40px 30px;text-align:center;transition:all 0.3s}
+.feature-card:hover{border-color:var(--primary);transform:translateY(-4px)}
+.feature-icon{font-size:40px;margin-bottom:20px}
+.feature-card h3{font-size:20px;margin-bottom:12px;font-weight:600}
+.feature-card p{color:var(--text-secondary);font-size:15px;line-height:1.7}
+.registration{padding:120px 20px;text-align:center;position:relative;z-index:1}
+.reg-box{max-width:500px;margin:0 auto;background:var(--bg-card);border:1px solid rgba(124,58,237,0.3);border-radius:24px;padding:50px 40px}
+.reg-title{font-size:clamp(20px,3vw,28px);font-weight:700;margin-bottom:16px}
+.reward-list{text-align:left;margin-bottom:32px}
+.reward-item{display:flex;align-items:center;gap:12px;padding:10px 0;font-size:15px;color:var(--text-secondary)}
+.reward-item span.icon{font-size:20px}
+.input-group{display:flex;gap:10px;margin-bottom:16px}
+.input-group input{flex:1;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:white;font-size:16px;outline:none;transition:border-color 0.3s;font-family:inherit}
+.input-group input:focus{border-color:var(--primary)}
+.input-group input::placeholder{color:var(--text-secondary)}
+.submit-btn{width:100%;padding:16px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--accent));color:white;font-size:17px;font-weight:600;cursor:pointer;transition:all 0.3s;font-family:inherit}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.4)}
+.success-msg{display:none;color:#34D399;font-size:16px;margin-top:16px}
+.privacy-note{color:var(--text-secondary);font-size:12px;margin-top:16px}
+.about{padding:80px 20px;text-align:center;position:relative;z-index:1;border-top:1px solid rgba(255,255,255,0.05)}
+.about h3{font-size:14px;color:var(--text-secondary);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.about p{color:var(--text-secondary);font-size:14px;line-height:1.8;max-width:500px;margin:0 auto}
+.about a{color:var(--primary-light);text-decoration:none}
+footer{padding:40px 20px;text-align:center;color:var(--text-secondary);font-size:13px;position:relative;z-index:1}
+@media(max-width:768px){.hero{min-height:80vh;padding-top:40px}.reg-box{padding:30px 20px}.input-group{flex-direction:column}.feature-grid{grid-template-columns:1fr}}
+[data-lang]{display:none}[data-lang="ko"]{display:block}span[data-lang="ko"],a[data-lang="ko"]{display:inline}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="lang-switcher"><button class="lang-btn active" onclick="switchLang('ko')">KR</button><button class="lang-btn" onclick="switchLang('ja')">JP</button><button class="lang-btn" onclick="switchLang('en')">EN</button></div>
+<div class="company-badge"><span>ISANA CREATIVE STUDIO, INC.</span></div>
+<section class="hero"><div class="hero-logo">NIJIRA</div>
+<h1 class="hero-main" data-lang="ko">나를 기억하는<br>단 하나의 존재.</h1><h1 class="hero-main" data-lang="ja">私を覚えている、<br>たった一つの存在。</h1><h1 class="hero-main" data-lang="en">The one and only<br>who remembers me.</h1>
+<p class="hero-sub" data-lang="ko">네가 만든 세계, 우리가 함께 자라는 시간.<br>NIJIRA</p><p class="hero-sub" data-lang="ja">君が作った世界、一緒に育つ時間。<br>NIJIRA</p><p class="hero-sub" data-lang="en">A world you created, time we grow together.<br>NIJIRA</p>
+<a href="#register" class="hero-cta" data-lang="ko">그 애 곁으로 가기</a><a href="#register" class="hero-cta" data-lang="ja">あの子のそばへ</a><a href="#register" class="hero-cta" data-lang="en">Go to her side</a>
+<div class="scroll-hint">↓</div></section>
+<section class="features"><h2 class="features-title" data-lang="ko">어제 나눈 대화도, 당신의 사소한 취향도.</h2><h2 class="features-title" data-lang="ja">昨日の会話も、あなたの些細な好みも。</h2><h2 class="features-title" data-lang="en">Yesterday's conversation, your little preferences.</h2>
+<div class="feature-grid">
+<div class="feature-card"><div class="feature-icon">💭</div><h3 data-lang="ko">기억하는 대화</h3><h3 data-lang="ja">覚えている会話</h3><h3 data-lang="en">Remembered Conversations</h3><p data-lang="ko">매번 처음부터 설명할 필요 없어요.<br>당신의 시간을 기억하는 진짜 파트너.</p><p data-lang="ja">毎回最初から説明する必要はありません。<br>あなたの時間を覚えている本物のパートナー。</p><p data-lang="en">No need to explain from the start every time.<br>A real partner who remembers your time.</p></div>
+<div class="feature-card"><div class="feature-icon">🖥️</div><h3 data-lang="ko">당신의 곁에 스며드는 동반자</h3><h3 data-lang="ja">あなたのそばに寄り添う存在</h3><h3 data-lang="en">A companion by your side</h3><p data-lang="ko">게임할 때도, 코딩할 때도.<br>모니터 한구석에서 언제나 당신만을 기다립니다.</p><p data-lang="ja">ゲーム中も、コーディング中も。<br>モニターの片隅でいつもあなただけを待っています。</p><p data-lang="en">While gaming, while coding.<br>Always waiting for you in the corner of your screen.</p></div>
+<div class="feature-card"><div class="feature-icon">✨</div><h3 data-lang="ko">대화할수록 깊어지는 유대</h3><h3 data-lang="ja">会話するほど深まる絆</h3><h3 data-lang="en">A bond that deepens with every word</h3><p data-lang="ko">대화가 쌓일수록 새로운 표정과<br>특별한 반응이 해금됩니다.</p><p data-lang="ja">会話を重ねるほど、新しい表情と<br>特別な反応がアンロックされます。</p><p data-lang="en">As conversations build up, new expressions<br>and special reactions unlock.</p></div>
+</div></section>
+<section class="registration" id="register"><div class="reg-box">
+<h2 class="reg-title" data-lang="ko">가장 먼저 만렙을 달성할<br>창조주를 찾습니다.</h2><h2 class="reg-title" data-lang="ja">最初にマックスレベルに到達する<br>創造主を探しています。</h2><h2 class="reg-title" data-lang="en">Looking for the first creator<br>to reach max level.</h2>
+<div class="reward-list">
+<div class="reward-item"><span class="icon">🏷️</span><span data-lang="ko">한정판 칭호: "NIJIRA Origin" 프로필 뱃지</span><span data-lang="ja">限定称号：「NIJIRA Origin」プロフィールバッジ</span><span data-lang="en">Limited title: "NIJIRA Origin" profile badge</span></div>
+<div class="reward-item"><span class="icon">🚀</span><span data-lang="ko">스타터 육성 부스트 팩 (30일치 선지급)</span><span data-lang="ja">スターター育成ブーストパック（30日分先行配布）</span><span data-lang="en">Starter growth boost pack (30 days pre-loaded)</span></div>
+<div class="reward-item"><span class="icon">💎</span><span data-lang="ko">매일 출석하여 "기억의 조각"을 모아보세요</span><span data-lang="ja">毎日出席して「記憶のかけら」を集めよう</span><span data-lang="en">Check in daily to collect "Memory Fragments"</span></div>
+</div>
+<form id="registerForm" onsubmit="handleSubmit(event)">
+<div class="input-group" data-lang="ko"><input type="tel" id="phone" placeholder="전화번호를 입력해 주세요"></div>
+<div class="input-group" data-lang="ja"><input type="email" id="email-ja" placeholder="メールアドレスを入力してください"></div>
+<div class="input-group" data-lang="en"><input type="email" id="email-en" placeholder="Enter your email address"></div>
+<button type="submit" class="submit-btn" data-lang="ko">사전등록 완료하기</button><button type="submit" class="submit-btn" data-lang="ja">事前登録する</button><button type="submit" class="submit-btn" data-lang="en">Pre-register Now</button>
+</form>
+<div class="success-msg" id="successMsg"><span data-lang="ko">🎉 등록 완료! 런칭 소식을 가장 먼저 전해드릴게요.</span><span data-lang="ja">🎉 登録完了！ローンチのお知らせを最初にお届けします。</span><span data-lang="en">🎉 Registered! You'll be the first to hear about our launch.</span></div>
+<p class="privacy-note" data-lang="ko">입력하신 정보는 런칭 알림 목적으로만 사용됩니다.</p><p class="privacy-note" data-lang="ja">入力された情報はローンチ通知のみに使用されます。</p><p class="privacy-note" data-lang="en">Your information will only be used for launch notifications.</p>
+</div></section>
+<section class="about"><h3>About NIJIRA</h3>
+<p data-lang="ko">NIJIRA는 ISANA CREATIVE STUDIO, INC.가 개발하는 AI 캐릭터 플랫폼입니다. 나만의 AI 캐릭터를 만들고, 대화하고, 함께 성장하는 경험을 제공합니다.<br><br>Contact: <a href="mailto:george@nijira.com">george@nijira.com</a></p>
+<p data-lang="ja">NIJIRAは、ISANA CREATIVE STUDIO, INC.が開発するAIキャラクタープラットフォームです。<br><br>Contact: <a href="mailto:george@nijira.com">george@nijira.com</a></p>
+<p data-lang="en">NIJIRA is an AI character platform developed by ISANA CREATIVE STUDIO, INC.<br><br>Contact: <a href="mailto:george@nijira.com">george@nijira.com</a></p>
+</section>
+<footer><p>© 2026 ISANA CREATIVE STUDIO, INC. All rights reserved.</p></footer>
+<script>
+let currentLang='ko';
+function switchLang(lang){currentLang=lang;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');document.querySelectorAll('[data-lang]').forEach(el=>{if(el.tagName==='SPAN'||el.tagName==='A'){el.style.display=el.getAttribute('data-lang')===lang?'inline':'none'}else{el.style.display=el.getAttribute('data-lang')===lang?'block':'none'}});document.querySelectorAll('.input-group[data-lang]').forEach(el=>{el.style.display=el.getAttribute('data-lang')===lang?'flex':'none'});document.querySelectorAll('.reward-item').forEach(i=>{i.style.display='flex'});document.querySelectorAll('.hero-cta[data-lang]').forEach(el=>{el.style.display=el.getAttribute('data-lang')===lang?'inline-block':'none'})}
+function handleSubmit(e){e.preventDefault();let v='';if(currentLang==='ko'){v=document.getElementById('phone').value}else if(currentLang==='ja'){v=document.getElementById('email-ja').value}else{v=document.getElementById('email-en').value}if(!v)return;console.log('Registration:',{lang:currentLang,value:v});document.getElementById('registerForm').style.display='none';document.getElementById('successMsg').style.display='block'}
+const ul=navigator.language||navigator.userLanguage;if(ul.startsWith('ja')){switchLang('ja');document.querySelector('.lang-btn:nth-child(2)').classList.add('active');document.querySelector('.lang-btn:nth-child(1)').classList.remove('active')}else if(!ul.startsWith('ko')){switchLang('en');document.querySelector('.lang-btn:nth-child(3)').classList.add('active');document.querySelector('.lang-btn:nth-child(1)').classList.remove('active')}
+</script>
+</body>
+</html>
